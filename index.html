@@ -21,6 +21,8 @@ body , html {
 
 }
 
+/*
+
 .grid {
    display: grid;
    grid-template-columns: 1fr;
@@ -32,14 +34,35 @@ body , html {
    min-height: 100vh;
 }
 
+Old original grid 
+*/
+
+/* Grid for scroll-snap */
+
+.grid {
+  display: grid;                 /* keep layout as grid (one column) */
+  grid-template-columns: 1fr;    /* one column layout */
+  gap: 10px;                     /* vertical gap between sections (optional) */
+  justify-items: center;
+  align-items: center;
+
+  /* ---- make the grid the scroll container ---- */
+  height: 100vh;                 /* full viewport height */
+  overflow-y: auto;              /* allow this container to scroll */
+  scroll-snap-type: y mandatory; /* enable vertical scroll snapping */
+  -webkit-overflow-scrolling: touch; /* smoother scrolling on iOS */
+    scroll-behavior: smooth;
+}
+
+
+
 .title {
     text-align: center;
  
 }
+/*
 
 .grid img {
-    position: sticky;
-    top: 0;
     width: 100%;
     height: 100;
     width: 300px;
@@ -48,8 +71,19 @@ body , html {
     border-radius: 8px;
     display: block;
 }
+*/
+
+.grid img {
+  width: 300px;         /* fixed width for consistent layout */
+  max-width: 90%;       /* responsive fallback for small screens */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
 
 .title {
+    position: sticky;
 top: 0;
 background: rgba(255, 215, 0, 0.15); /* faint gold glow */
   padding: 10px;
@@ -68,7 +102,19 @@ background: rgba(255, 215, 0, 0.15); /* faint gold glow */
   position: relative;
   height: 100vh; /* full screen for each image */
   overflow: hidden; /* prevents scaled images from spilling outside */
+
+   /* ---- snapping alignment ---- */
+  scroll-snap-align: start; /* snap this section to the top of the container */
 }
+
+/*
+
+.grid div {
+    animation: scrolling 1.2s ease-out both;
+}
+*/
+
+
 
 .grid div h1 {
     position: relative;       /* make z-index work */
@@ -127,6 +173,22 @@ background: rgba(255, 215, 0, 0.15); /* faint gold glow */
 .img9:hover img {
     filter: hue-rotate(270deg) brightness(0.9);
 }
+    
+
+
+
+@keyframes scrolling {
+    from {
+        opacity: 0.7;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
     
 </style>
 
